@@ -22,6 +22,7 @@ const initialMessages = [
 ];
 export default function MessagesScreen() {
   const [messages, setMessages] = useState(initialMessages);
+  const [refreshing, setRefreshing] = useState(false);
 
   const handleDelete = (message) => {
     setMessages(messages.filter((m) => m.id !== message.id));
@@ -37,13 +38,24 @@ export default function MessagesScreen() {
             title={item.title}
             subTitle={item.description}
             image={item.image}
-            onPress={() => console.log('Message selectes', item)}
+            onPress={() => console.log('Message selected', item)}
             renderRightActions={() => (
               <ListItemDeleteAction onPress={() => handleDelete(item)} />
             )}
           />
         )}
         ItemSeparatorComponent={ListItemSeperator}
+        refreshing={refreshing}
+        onRefresh={() =>
+          setMessages([
+            {
+              id: 2,
+              title: 'T2',
+              description: 'D2',
+              image: require('../assets/mosh.jpg'),
+            },
+          ])
+        }
       ></FlatList>
     </Screen>
   );
