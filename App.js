@@ -5,6 +5,8 @@ import ListingDetailsScreen from './app/screens/ListingDetailsScreen';
 import MessagesScreen from './app/screens/MessagesScreen';
 import AccountScreen from './app/screens/AccountScreen';
 import ListingsScreen from './app/screens/ListingsScreen';
+import AppTextInput from './app/components/AppTextInput';
+import Screen from './app/components/Screen';
 
 export default function App() {
   // return <WelcomeScreen />;
@@ -12,5 +14,10 @@ export default function App() {
   // // return <ListingDetailsScreen />;
   // return <MessagesScreen />;
   // return <AccountScreen />;
-  return <ListingsScreen />;
+  // return <ListingsScreen />;
+  return (
+    <Screen>
+      <AppTextInput placeholder="Username" icon="email"></AppTextInput>
+    </Screen>
+  );
 }
