@@ -7,6 +7,7 @@ import AccountScreen from './app/screens/AccountScreen';
 import ListingsScreen from './app/screens/ListingsScreen';
 import AppTextInput from './app/components/AppTextInput';
 import Screen from './app/components/Screen';
+import AppPicker from './app/components/AppPicker';
 
 export default function App() {
   // return <WelcomeScreen />;
@@ -17,7 +18,8 @@ export default function App() {
   // return <ListingsScreen />;
   return (
     <Screen>
-      <AppTextInput placeholder="Username" icon="email"></AppTextInput>
+      <AppPicker placeholder="Username" />
+      <AppTextInput placeholder="Email" />
     </Screen>
   );
 }
