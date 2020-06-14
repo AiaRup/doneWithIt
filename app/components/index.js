@@ -9,3 +9,4 @@ export { ListItemDeleteAction } from './ListItemDeleteAction';
 export { ListItemSeperator } from './ListItemSeperator';
 export { PickerItem } from './PickerItem';
 export { Screen } from './Screen';
+export { ErrorMessage } from './ErrorMessage';
