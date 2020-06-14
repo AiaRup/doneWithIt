@@ -13,3 +13,4 @@ export { ErrorMessage } from './forms/ErrorMessage';
 export { AppFormField } from './forms/AppFormField';
 export { SubmitButton } from './forms/SubmitButton';
 export { AppForm } from './forms/AppForm';
+export { AppFormPicker } from './forms/AppFormPicker';

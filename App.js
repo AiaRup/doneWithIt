@@ -8,8 +8,9 @@ import {
   ListingsScreen,
   LoginScreen,
   RegisterScreen,
+  ListingEditScreen,
 } from './app/screens';
 
 export default function App() {
-  return <RegisterScreen />;
+  return <ListingEditScreen />;
 }
