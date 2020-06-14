@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { StyleSheet, FlatList } from 'react-native';
 
-import ListItem from '../components/ListItem';
-import ListItemSeperator from '../components/ListItemSeperator';
-import Screen from '../components/Screen';
-import ListItemDeleteAction from '../components/ListItemDeleteAction';
+import {
+  ListItem,
+  ListItemSeperator,
+  Screen,
+  ListItemDeleteAction,
+} from '../components';
 
 const initialMessages = [
   {
@@ -20,7 +22,7 @@ const initialMessages = [
     image: require('../assets/mosh.jpg'),
   },
 ];
-export default function MessagesScreen() {
+export const MessagesScreen = () => {
   const [messages, setMessages] = useState(initialMessages);
   const [refreshing, setRefreshing] = useState(false);
 
@@ -59,6 +61,6 @@ export default function MessagesScreen() {
       ></FlatList>
     </Screen>
   );
-}
+};
 
 const styles = StyleSheet.create({});

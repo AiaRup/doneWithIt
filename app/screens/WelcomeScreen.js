@@ -1,8 +1,9 @@
 import React from 'react';
 import { StyleSheet, View, ImageBackground, Image, Text } from 'react-native';
-import AppButton from '../components/AppButton';
 
-export default function WelcomeScreen() {
+import { AppButton } from '../components';
+
+export const WelcomeScreen = () => {
   return (
     <ImageBackground
       blurRadius={10}
@@ -19,7 +20,7 @@ export default function WelcomeScreen() {
       </View>
     </ImageBackground>
   );
-}
+};
 
 const styles = StyleSheet.create({
   background: {

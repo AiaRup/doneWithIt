@@ -2,17 +2,17 @@ import React from 'react';
 import { StyleSheet, View, Image, TouchableHighlight } from 'react-native';
 import Swipeable from 'react-native-gesture-handler/Swipeable';
 
-import AppText from '../components/AppText';
+import { AppText } from '../components/AppText';
 import colors from '../config/colors';
 
-export default function ListItem({
+export const ListItem = ({
   image,
   title,
   subTitle,
   onPress,
   renderRightActions,
   IconComponent,
-}) {
+}) => {
   return (
     <Swipeable renderRightActions={renderRightActions}>
       <TouchableHighlight underlayColor={colors.light} onPress={onPress}>
@@ -27,7 +27,7 @@ export default function ListItem({
       </TouchableHighlight>
     </Swipeable>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {

@@ -9,18 +9,18 @@ import {
 } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
-import AppText from './AppText';
-import PickerItem from './PickerItem';
-import Screen from './Screen';
+import { AppText } from './AppText';
+import { PickerItem } from './PickerItem';
+import { Screen } from './Screen';
 import defaultStyles from '../config/styles';
 
-export default function AppPicker({
+export const AppPicker = ({
   icon,
   items,
   onSelectItem,
   placeholder,
   selectedItem,
-}) {
+}) => {
   const [modalVisible, setModalVisible] = useState(false);
   return (
     <>
@@ -64,7 +64,7 @@ export default function AppPicker({
       </Modal>
     </>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {

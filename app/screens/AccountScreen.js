@@ -1,10 +1,7 @@
 import React from 'react';
 import { StyleSheet, View, FlatList } from 'react-native';
 
-import ListItem from '../components/ListItem';
-import Screen from '../components/Screen';
-import Icon from '../components/Icon';
-import ListItemSeperator from '../components/ListItemSeperator';
+import { ListItem, Screen, Icon, ListItemSeperator } from '../components';
 import colors from '../config/colors';
 
 const menuItems = [
@@ -23,7 +20,7 @@ const menuItems = [
     },
   },
 ];
-export default function AccountScreen() {
+export const AccountScreen = () => {
   return (
     <Screen style={styles.screen}>
       <View style={styles.container}>
@@ -57,7 +54,7 @@ export default function AccountScreen() {
       />
     </Screen>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
