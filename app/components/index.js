@@ -12,3 +12,4 @@ export { Screen } from './Screen';
 export { ErrorMessage } from './ErrorMessage';
 export { AppFormField } from './AppFormField';
 export { SubmitButton } from './SubmitButton';
+export { AppForm } from './AppForm';

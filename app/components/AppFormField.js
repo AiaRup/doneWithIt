@@ -1,5 +1,4 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
 import { useFormikContext } from 'formik';
 
 import { AppTextInput } from './AppTextInput';
@@ -18,5 +17,3 @@ export const AppFormField = ({ name, ...rest }) => {
     </>
   );
 };
-
-const styles = StyleSheet.create({});
