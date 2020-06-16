@@ -6,6 +6,7 @@ import {
   AppForm,
   AppFormField,
   AppFormPicker,
+  CategoryPickerItem,
   SubmitButton,
   Screen,
 } from '../components';
@@ -47,6 +48,7 @@ export const ListingEditScreen = () => {
         <AppFormPicker
           items={categories}
           name="category"
+          PickerItemComponent={CategoryPickerItem}
           placeholder="Category"
           width="50%"
         />
