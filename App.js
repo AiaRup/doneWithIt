@@ -12,5 +12,5 @@ import {
 } from './app/screens';
 
 export default function App() {
-  return <MessagesScreen />;
+  return <ListingEditScreen />;
 }
