@@ -37,6 +37,7 @@ export const MessagesScreen = () => {
         keyExtractor={(message) => message.id.toString()}
         renderItem={({ item }) => (
           <ListItem
+            showChevrons
             title={item.title}
             subTitle={item.description}
             image={item.image}
