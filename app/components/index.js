@@ -15,3 +15,6 @@ export { SubmitButton } from './forms/SubmitButton';
 export { AppForm } from './forms/AppForm';
 export { AppFormPicker } from './forms/AppFormPicker';
 export { CategoryPickerItem } from './CategoryPickerItem';
+export { ImageInput } from './ImageInput';
+export { ImageInputList } from './ImageInputList';
+export { FormImagePicker } from './forms/FormImagePicker';

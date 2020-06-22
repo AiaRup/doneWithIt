@@ -11,6 +11,8 @@ import {
   ListingEditScreen,
 } from './app/screens';
 
+import { ImageInput } from './app/components';
+
 export default function App() {
-  return <ListingEditScreen />;
+  return <ImageInput />;
 }
