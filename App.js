@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
+import * as ImagePicker from 'expo-image-picker';
 import {
   WelcomeScreen,
   ViewImageScreen,
@@ -11,8 +12,11 @@ import {
   ListingEditScreen,
 } from './app/screens';
 
-import { ImageInput } from './app/components';
+import { Screen } from './app/components';
 
 export default function App() {
-  return <ImageInput />;
+  useEffect(async () => {
+    const result = await ImagePicker.requestCameraRollPermissionsAsync();
+  }, []);
+  return <Screen></Screen>;
 }
