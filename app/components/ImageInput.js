@@ -47,6 +47,7 @@ export const ImageInput = ({ imageUri, onChangeImage }) => {
       ]);
     }
   };
+
   return (
     <TouchableWithoutFeedback onPress={handlePress}>
       <View style={styles.container}>
