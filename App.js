@@ -1,17 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import * as ImagePicker from 'expo-image-picker';
-import {
-  WelcomeScreen,
-  ViewImageScreen,
-  ListingDetailsScreen,
-  MessagesScreen,
-  AccountScreen,
-  ListingsScreen,
-  LoginScreen,
-  RegisterScreen,
-  ListingEditScreen,
-} from './app/screens';
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+
+import AuthNavigator from './app/navigation/AuthNavigator';
 
 export default function App() {
-  return <ListingEditScreen />;
+  return (
+    <NavigationContainer>
+      <AuthNavigator />
+    </NavigationContainer>
+  );
 }

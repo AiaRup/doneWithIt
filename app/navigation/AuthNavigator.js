@@ -5,10 +5,14 @@ import { WelcomeScreen, LoginScreen, RegisterScreen } from '../screens';
 
 const Stack = createStackNavigator();
 
-export default AuthNavigator = () => {
+export default AuthNavigator = () => (
   <Stack.Navigator>
-    <Stack.Screen name="Welcome" component={WelcomeScreen} />
+    <Stack.Screen
+      name="Welcome"
+      component={WelcomeScreen}
+      options={{ headerShown: false }}
+    />
     <Stack.Screen name="Login" component={LoginScreen} />
     <Stack.Screen name="Register" component={RegisterScreen} />
-  </Stack.Navigator>;
-};
+  </Stack.Navigator>
+);
