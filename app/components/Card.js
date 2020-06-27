@@ -9,11 +9,11 @@ import {
 import { AppText } from '../components/AppText';
 import colors from '../config/colors';
 
-export const Card = ({ title, subTitle, image, onPress }) => {
+export const Card = ({ title, subTitle, imageUrl, onPress }) => {
   return (
     <TouchableWithoutFeedback onPress={onPress}>
       <View style={styles.card}>
-        <Image style={styles.image} source={image} />
+        <Image style={styles.image} source={{ uri: imageUrl }} />
         <View style={styles.detailsContainer}>
           <AppText style={styles.title} numberOfLines={1}>
             {title}
