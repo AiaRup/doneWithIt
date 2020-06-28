@@ -15,9 +15,6 @@ export const ListingsScreen = ({ navigation }) => {
 
   const loadListings = async () => {
     const response = await listingsApi.getListings();
-    console.log(listingsApi.getListings);
-    console.log(response.data);
-
     setListings(response.data);
   };
   return (
