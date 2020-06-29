@@ -18,3 +18,4 @@ export { CategoryPickerItem } from './CategoryPickerItem';
 export { ImageInput } from './ImageInput';
 export { ImageInputList } from './ImageInputList';
 export { FormImagePicker } from './forms/FormImagePicker';
+export { ActivityIndicator } from './ActivityIndicator';
