@@ -88,6 +88,7 @@ export const ListingEditScreen = () => {
   const handleSubmit = async (listing) => {
     setProgress(0);
     setUploadVisible(true);
+    3;
     const result = await listingsApi.addListing(
       { ...listing, location },
       (progress) => setProgress(progress)
