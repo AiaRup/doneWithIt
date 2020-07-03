@@ -7,12 +7,10 @@ const {
   SENDER_ID,
   APP_ID,
   MEASUREMENT_ID,
-} = process.env;
-
-console.log(process.env);
+} = 'react-native-dotenv';
 
 export default {
-  apiKey: API_KEY,
+  apiKey: process.env.API_KEY,
   authDomain: AUTH_DOMAIN,
   databaseURL: DATABASE_URL,
   projectId: PROJECT_ID,
