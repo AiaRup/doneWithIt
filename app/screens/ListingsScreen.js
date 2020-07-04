@@ -12,14 +12,19 @@ import colors from '../config/colors';
 import routes from '../navigation/routes';
 import listingsApi from '../api/listings';
 import useApi from '../hooks/useApi';
+import useFirestore from '../hooks/useFirestore';
 
 export const ListingsScreen = ({ navigation }) => {
-  const { data: listings, error, loading, request: loadListings } = useApi(
-    listingsApi.getListings
-  );
+  const {
+    data: listings,
+    error,
+    loading,
+    request: loadListings,
+  } = useFirestore('listings');
 
   useEffect(() => {
     loadListings();
+    console.log(listings);
   }, []);
   return (
     <Screen style={styles.screen}>
