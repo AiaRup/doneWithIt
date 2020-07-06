@@ -1,14 +1,15 @@
 import { useState } from 'react';
-import { fuego } from '@nandorojo/swr-firestore';
+import { useFirebaseContext } from '../services/firebase';
 
 export default useFirestore = (func) => {
   const [data, setData] = useState([]);
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
+  const { firebase } = useFirebaseContext();
 
   const request = async (...args) => {
     setLoading(true);
-    func(fuego.db, ...args)
+    func(firebase, ...args)
       .then(function (querySnapshot) {
         const response = [];
         querySnapshot.forEach(function (doc) {

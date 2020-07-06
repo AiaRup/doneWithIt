@@ -1,18 +1,20 @@
 const endpoint = 'listings';
 
-const getListings = (db) => {
-  return db.collection(endpoint).get();
+const getListings = (firebase) => {
+  return firebase.firestore().collection(endpoint).get();
 };
 
-const addListing = (db, listing) => {
-  let data = { ...listing, categoryId: listing.category.value };
+const addListing = (firebase, listing) => {
+  let data = {
+    ...listing,
+    categoryId: listing.category.value,
+    price: +listing.price,
+  };
   delete data.category;
 
-  const proccesedImages = listing.images.map((image, index) => ({
-    name: 'image' + index,
-    type: 'image/jpeg',
-    uri: image,
-  }));
+  const proccesedImages = listing.images.map((image) => {
+    return { url: image };
+  });
 
   data = { ...data, images: proccesedImages };
 
@@ -20,7 +22,7 @@ const addListing = (db, listing) => {
     data['location'] = listing.location;
   }
 
-  return db.collection(endpoint).add(data);
+  return firebase.firestore().collection(endpoint).add(data);
 };
 
 export default {

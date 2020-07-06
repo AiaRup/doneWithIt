@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { StyleSheet } from 'react-native';
-import { useCollection } from '@nandorojo/swr-firestore';
 import * as Yup from 'yup';
 
 import {
@@ -13,6 +12,7 @@ import {
   FormImagePicker,
 } from '../components';
 import useLocation from '../hooks/useLocation';
+import useCollection from '../hooks/useCollection';
 import listingsFirebase from '../firebase/listings';
 import { UploadScreen } from './UploadScreen';
 
