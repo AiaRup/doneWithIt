@@ -19,8 +19,13 @@ export const ListingsScreen = ({ navigation }) => {
   );
 
   useEffect(() => {
-    loadListings();
-  }, []);
+    const unsubscribe = navigation.addListener('focus', () => {
+      loadListings();
+    });
+
+    return unsubscribe;
+  }, [navigation]);
+
   return (
     <Screen style={styles.screen}>
       {error && (
