@@ -22,8 +22,17 @@ export const ListingsScreen = ({ navigation }) => {
   } = useFirestore(listingsFirebase.getListings);
 
   useEffect(() => {
-    loadListings();
-  }, []);
+    const unsubscribe = navigation.addListener('focus', () => {
+      loadListings();
+    });
+
+    return unsubscribe;
+  }, [navigation]);
+
+  // useEffect(() => {
+  //   loadListings();
+  // }, []);
+
   return (
     <Screen style={styles.screen}>
       {error && (
