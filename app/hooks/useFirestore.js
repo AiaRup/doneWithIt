@@ -1,23 +1,28 @@
 import { useState } from 'react';
-import { useCollection } from '@nandorojo/swr-firestore';
+import { fuego } from '@nandorojo/swr-firestore';
 
-export default useFirestore = (collection, newDoc) => {
+export default useFirestore = (func) => {
   const [data, setData] = useState([]);
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
-  const { data: resData, add, error: resError } = useCollection(collection);
 
-  const request = async () => {
+  const request = async (...args) => {
     setLoading(true);
-    if (newDoc) {
-      add(newDoc);
-    }
+    func(fuego.db, ...args)
+      .then(function (querySnapshot) {
+        const response = [];
+        querySnapshot.forEach(function (doc) {
+          response.push({ id: doc.id, ...doc.data() });
+        });
+
+        setData(response);
+        setError(false);
+      })
+      .catch(() => {
+        setError(true);
+      });
+
     setLoading(false);
-
-    if (resError) return setError(true);
-
-    setError(false);
-    setData(resData);
   };
   return { data, error, loading, request };
 };

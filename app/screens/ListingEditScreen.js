@@ -13,7 +13,7 @@ import {
   FormImagePicker,
 } from '../components';
 import useLocation from '../hooks/useLocation';
-import listingsApi from '../api/listings';
+import listingsFirebase from '../firebase/listings';
 import { UploadScreen } from './UploadScreen';
 
 const validationSchema = Yup.object().shape({
@@ -28,21 +28,25 @@ export const ListingEditScreen = () => {
   const location = useLocation();
   const [uploadVisible, setUploadVisible] = useState(false);
   const [progress, setProgress] = useState(0);
-  const { data: categories, update, error } = useCollection(`categories`);
+
+  const { data: categories } = useCollection('categories');
+  const { error, request } = useFirestore(listingsFirebase.addListing);
 
   const handleSubmit = async (listing, { resetForm }) => {
     setProgress(0);
     setUploadVisible(true);
     3;
-    const result = await listingsApi.addListing(
-      { ...listing, location },
-      (progress) => setProgress(progress)
-    );
 
-    if (!result.ok) {
+    request({
+      ...listing,
+      location,
+    });
+
+    if (error) {
       setUploadVisible(false);
       return alert('Could not save the listing.');
     }
+    setProgress(100);
 
     resetForm();
   };

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { StyleSheet, FlatList } from 'react-native';
 
 import {
@@ -10,8 +10,7 @@ import {
 } from '../components';
 import colors from '../config/colors';
 import routes from '../navigation/routes';
-import listingsApi from '../api/listings';
-import useApi from '../hooks/useApi';
+import listingsFirebase from '../firebase/listings';
 import useFirestore from '../hooks/useFirestore';
 
 export const ListingsScreen = ({ navigation }) => {
@@ -20,11 +19,10 @@ export const ListingsScreen = ({ navigation }) => {
     error,
     loading,
     request: loadListings,
-  } = useFirestore('listings');
+  } = useFirestore(listingsFirebase.getListings);
 
   useEffect(() => {
     loadListings();
-    console.log(listings);
   }, []);
   return (
     <Screen style={styles.screen}>
