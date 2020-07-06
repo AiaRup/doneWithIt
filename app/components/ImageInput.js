@@ -29,8 +29,9 @@ export const ImageInput = ({ imageUri, onChangeImage }) => {
   const uploadImageAsync = async (firebase, uri) => {
     const response = await fetch(uri);
     const blob = await response.blob();
+    const name = uri.substring(uri.lastIndexOf('/') + 1, uri.lastIndexOf('.'));
 
-    const ref = firebase.storage().ref().child(`images/${uri}`);
+    const ref = firebase.storage().ref().child(`images/${name}_full.jpg`);
     return ref.put(blob);
   };
 
@@ -46,7 +47,7 @@ export const ImageInput = ({ imageUri, onChangeImage }) => {
       if (!cancelled) {
         uploadImageAsync(firebase, uri).then((snapshot) => {
           snapshot.ref.getDownloadURL().then((url) => {
-            onChangeImage(uri);
+            onChangeImage(url);
           });
         });
       }
