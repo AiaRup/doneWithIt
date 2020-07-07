@@ -8,7 +8,7 @@ import AuthNavigator from './app/navigation/AuthNavigator';
 import AuthContext from './app/auth/context';
 
 export default function App() {
-  const [user, setUser] = useState(undefined);
+  const [user, setUser] = useState(null);
   return (
     <AuthContext.Provider value={{ user, setUser }}>
       <OfflineNotice />
