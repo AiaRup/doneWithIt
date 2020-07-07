@@ -5,8 +5,10 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 import { AppText } from '../AppText';
 import colors from '../../config/colors';
+import { AvatarText } from '../AvatarText';
 
 export const ListItem = ({
+  avatar,
   image,
   title,
   subTitle,
@@ -21,6 +23,7 @@ export const ListItem = ({
         <View style={styles.container}>
           {IconComponent}
           {image && <Image style={styles.image} source={image} />}
+          {avatar && <AvatarText text={avatar} />}
           <View style={styles.detailsContainer}>
             <AppText style={styles.title} numberOfLines={1}>
               {title}
