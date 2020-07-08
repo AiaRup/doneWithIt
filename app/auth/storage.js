@@ -2,7 +2,7 @@ import * as SecureStore from 'expo-secure-store';
 
 const key = 'authToken';
 
-const setToken = async (authToken) => {
+const storeToken = async (authToken) => {
   try {
     await SecureStore.setItemAsync(key, authToken);
   } catch (error) {
@@ -27,7 +27,7 @@ const removeToken = async () => {
 };
 
 export default {
-  setToken,
+  storeToken,
   getToken,
   removeToken,
 };
