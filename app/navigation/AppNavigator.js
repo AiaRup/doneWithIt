@@ -22,8 +22,8 @@ export default AppNavigator = () => {
     try {
       const permission = await Permissions.askAsync(Permissions.NOTIFICATIONS);
       if (!permission.granted) return;
-      const token = Notifications.getExpoPushTokenAsync();
-      expoPushNotificationApi(token);
+      const token = await Notifications.getExpoPushTokenAsync();
+      expoPushNotificationApi.register(token);
     } catch (error) {
       console.log('Error getting a push token', error);
     }
