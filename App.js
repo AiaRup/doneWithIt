@@ -9,6 +9,7 @@ import { OfflineNotice } from './app/components';
 import AuthNavigator from './app/navigation/AuthNavigator';
 import AuthContext from './app/auth/context';
 import authStorage from './app/auth/storage';
+import { navigationRef } from './app/navigation/RootNavigation';
 
 I18nManager.forceRTL(false);
 I18nManager.allowRTL(false);
@@ -30,7 +31,7 @@ export default function App() {
   return (
     <AuthContext.Provider value={{ user, setUser }}>
       <OfflineNotice />
-      <NavigationContainer theme={navigationTheme}>
+      <NavigationContainer ref={navigationRef} theme={navigationTheme}>
         {user ? <AppNavigator /> : <AuthNavigator />}
       </NavigationContainer>
     </AuthContext.Provider>
