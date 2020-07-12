@@ -20,7 +20,7 @@
     },
     "description": "A marketplace for selling the stuff you don't need anymore.",
     "notification": {
-      "iosDisplayInForefround": true
+      "iosDisplayInForeground": true
     }
   }
 }

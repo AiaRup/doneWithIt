@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Alert, Keyboard } from 'react-native';
 import { Notifications } from 'expo';
 import * as Yup from 'yup';
@@ -6,9 +6,12 @@ import * as Yup from 'yup';
 import { AppForm } from './forms/AppForm';
 import { AppFormField } from './forms/AppFormField';
 import { SubmitButton } from './forms/SubmitButton';
+import { ErrorMessage } from './forms/ErrorMessage';
 import messagesApi from '../api/messages';
 
 export const ContactSellerForm = ({ listing }) => {
+  const [error, setError] = useState(false);
+
   const handleSubmit = async ({ message }, { resetForm }) => {
     Keyboard.dismiss();
 
@@ -16,10 +19,12 @@ export const ContactSellerForm = ({ listing }) => {
 
     if (!result.ok) {
       console.log('Error', result);
+      setError(true);
       return Alert.alert('Error', 'Could not send the message to the seller.');
     }
 
     resetForm();
+    setError(false);
 
     Notifications.presentLocalNotificationAsync({
       title: 'Awesome!',
@@ -33,6 +38,7 @@ export const ContactSellerForm = ({ listing }) => {
       onSubmit={handleSubmit}
       validationSchema={validationSchema}
     >
+      <ErrorMessage error="You must add a message." visible={error} />
       <AppFormField
         maxLength={255}
         multiline
