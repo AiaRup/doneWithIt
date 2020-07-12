@@ -9,6 +9,7 @@ export { AppTextInput } from './forms/AppTextInput';
 export { AvatarText } from './AvatarText';
 export { CategoryPickerItem } from './CategoryPickerItem';
 export { Card } from './Card';
+export { ContactSellerForm } from './ContactSellerForm';
 export { ErrorMessage } from './forms/ErrorMessage';
 export { FormImagePicker } from './forms/FormImagePicker';
 export { Icon } from './Icon';
