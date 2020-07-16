@@ -1,3 +1,6 @@
+import Bugsnag from '@bugsnag/expo';
+Bugsnag.start();
+
 import React, { useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { AppLoading } from 'expo';
