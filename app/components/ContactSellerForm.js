@@ -7,6 +7,7 @@ import { AppForm } from './forms/AppForm';
 import { AppFormField } from './forms/AppFormField';
 import { SubmitButton } from './forms/SubmitButton';
 import messagesApi from '../api/messages';
+import logger from '../utility/logger';
 
 export const ContactSellerForm = ({ listing }) => {
   const handleSubmit = async ({ message }, { resetForm }) => {
@@ -15,7 +16,7 @@ export const ContactSellerForm = ({ listing }) => {
     const result = await messagesApi.send(message, listing.id);
 
     if (!result.ok) {
-      console.log('Error', result);
+      logger.log('Error', result);
       return Alert.alert('Error', 'Could not send the message to the seller.');
     }
 

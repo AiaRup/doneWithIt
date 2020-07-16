@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { FlatList } from 'react-native';
 
+import logger from '../utility/logger';
+
 import {
   ListItem,
   ListItemSeperator,
@@ -41,7 +43,7 @@ export const MessagesScreen = () => {
             title={item.title}
             subTitle={item.description}
             image={item.image}
-            onPress={() => console.log('Message selected', item)}
+            onPress={() => logger.log('Message selected', item)}
             renderRightActions={() => (
               <ListItemDeleteAction onPress={() => handleDelete(item)} />
             )}

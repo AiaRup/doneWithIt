@@ -1,6 +1,3 @@
-import Bugsnag from '@bugsnag/expo';
-Bugsnag.start();
-
 import React, { useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { AppLoading } from 'expo';
@@ -13,6 +10,9 @@ import AuthNavigator from './app/navigation/AuthNavigator';
 import AuthContext from './app/auth/context';
 import authStorage from './app/auth/storage';
 import { navigationRef } from './app/navigation/RootNavigation';
+import logger from './app/utility/logger';
+
+logger.start();
 
 I18nManager.forceRTL(false);
 I18nManager.allowRTL(false);

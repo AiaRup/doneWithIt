@@ -3,7 +3,7 @@ import { Notifications } from 'expo';
 import * as Permissions from 'expo-permissions';
 
 import expoPushNotificationApi from '../api/expoPushTokens';
-import navigation from '../navigation/RootNavigation';
+import logger from '../utility/logger';
 
 export default useNotification = (notificationListener) => {
   useEffect(() => {
@@ -19,7 +19,7 @@ export default useNotification = (notificationListener) => {
       const token = await Notifications.getExpoPushTokenAsync();
       expoPushNotificationApi.register(token);
     } catch (error) {
-      console.log('Error getting a push token', error);
+      logger.log('Error getting a push token', error);
     }
   };
 };
