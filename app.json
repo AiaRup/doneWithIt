@@ -17,7 +17,13 @@
     },
     "assetBundlePatterns": ["**/*"],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.aiarupsom.donewithit",
+      "buildNumber": "1.0.0"
+    },
+    "android": {
+      "package": "com.aiarupsom.donewithit",
+      "versionCode": 1
     },
     "description": "A marketplace for selling the stuff you don't need anymore.",
     "notification": {
