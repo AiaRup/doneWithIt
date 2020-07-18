@@ -1,3 +1,5 @@
+import 'firebase/firestore';
+import 'firebase/auth';
 import { useState } from 'react';
 import { useFirebaseContext } from '../services/firebase';
 

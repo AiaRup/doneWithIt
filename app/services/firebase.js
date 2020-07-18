@@ -6,9 +6,20 @@ import firebaseConfig from '../config/firebase';
 const FirebaseContext = createContext({});
 let firbaseRef = {};
 
+const initialState = {
+  user: {},
+  isAuthenticated: false,
+};
+
 if (!firebase.apps.length) {
   firbaseRef = firebase.initializeApp(firebaseConfig);
+  firebase.auth().onAuthChange(onAuthStateChange);
 }
+
+const onAuthStateChange = (userId) => {
+  user = userId;
+  isAuthenticated: !!userId;
+};
 
 export const FirebaseProvider = ({ children }) => {
   return (

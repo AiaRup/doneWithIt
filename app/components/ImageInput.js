@@ -11,6 +11,7 @@ import * as ImagePicker from 'expo-image-picker';
 
 import colors from '../config/colors';
 import { useFirebaseContext } from '../services/firebase';
+import logger from '../utility/logger';
 
 export const ImageInput = ({ imageUri, onChangeImage }) => {
   useEffect(() => {
@@ -52,7 +53,7 @@ export const ImageInput = ({ imageUri, onChangeImage }) => {
         });
       }
     } catch (error) {
-      console.log('Error reading an image.');
+      logger.log('Error reading an image.');
     }
   };
 

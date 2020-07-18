@@ -20,7 +20,7 @@ export const ViewImageScreen = () => {
       <Image
         style={styles.image}
         resizeMode="contain"
-        source={require('../assets/chair.jpg')}
+        source={require('../assets/background.jpg')}
       />
     </View>
   );
