@@ -4,6 +4,8 @@ const endpoint = '/listings';
 
 const getListings = () => client.get(endpoint);
 
+const getListingsByUser = (user) => client.get(`${endpoint}/?user=${user}`);
+
 const addListing = (
   { title, price, category, description, images, location },
   onUploadProgress
