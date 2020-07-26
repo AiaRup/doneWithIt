@@ -22,13 +22,8 @@ export const LoginScreen = () => {
   const [loginFailed, setLoginFailded] = useState(false);
   const { logIn } = firebaseAuth();
 
-  console.log('logIn', logIn);
-
   const handleSubmit = async ({ email, password }) => {
-    // const result = await authApi.login(email, password);
-    // const result = await authApi.login(email, password);
     const result = await logIn({ email, password });
-    console.log('result', result);
     if (!result.ok) return setLoginFailded(result.error);
     setLoginFailded(false);
   };
