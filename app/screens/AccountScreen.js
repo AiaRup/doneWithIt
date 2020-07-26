@@ -32,8 +32,8 @@ export const AccountScreen = ({ navigation }) => {
         <ListItem
           title={user.name}
           subTitle={user.email}
-          image={user.image}
-          avatar={user.name}
+          image={user.providerData[0].photoURL}
+          avatar={user.providerData[0].displayName}
         />
       </View>
       <View style={styles.container}>

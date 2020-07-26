@@ -9,23 +9,30 @@ import {
   AppFormField,
   SubmitButton,
 } from '../components';
-import authApi from '../api/auth';
-import useAuth from '../auth/useAuth';
+import { firebaseAuth } from '../firebase/auth';
 
 const validationSchema = Yup.object().shape({
   email: Yup.string().required().email().label('Email'),
-  password: Yup.string().required().min(4).label('Password'),
+  password: Yup.string()
+    .required()
+    .min(6, 'Password is too short - should be 6 chars minimum.')
+    .max(20, 'Password is too long - should be 20 chars maximum.')
+    .matches(
+      /^(?=.*?[0-9])(?=.*[A-Z]).{6,20}$/,
+      'Password needs to have at least one uppercase letter and one number.'
+    )
+    .label('Password'),
 });
 
 export const LoginScreen = () => {
-  const auth = useAuth();
   const [loginFailed, setLoginFailded] = useState(false);
+  const { logIn } = firebaseAuth();
 
   const handleSubmit = async ({ email, password }) => {
-    const result = await authApi.login(email, password);
-    if (!result.ok) return setLoginFailded(true);
     setLoginFailded(false);
-    auth.logIn(result.data);
+    const result = await logIn({ email, password });
+    if (!result.ok) return setLoginFailded(result.error);
+    setLoginFailded(false);
   };
 
   return (
@@ -37,7 +44,7 @@ export const LoginScreen = () => {
         validationSchema={validationSchema}
       >
         <ErrorMessage
-          error="Invalid email and/or password"
+          error={loginFailed || 'Invalid email and/or password'}
           visible={loginFailed}
         />
         <AppFormField

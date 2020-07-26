@@ -10,12 +10,15 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
 
 import colors from '../config/colors';
+import { useFirebaseContext } from '../services/firebase';
 import logger from '../utility/logger';
 
 export const ImageInput = ({ imageUri, onChangeImage }) => {
   useEffect(() => {
     requestPermission();
   }, []);
+
+  const { firebase } = useFirebaseContext();
 
   const requestPermission = async () => {
     const { granted } = await ImagePicker.requestCameraRollPermissionsAsync();
@@ -24,14 +27,30 @@ export const ImageInput = ({ imageUri, onChangeImage }) => {
     }
   };
 
+  const uploadImageAsync = async (firebase, uri) => {
+    const response = await fetch(uri);
+    const blob = await response.blob();
+    const name = uri.substring(uri.lastIndexOf('/') + 1, uri.lastIndexOf('.'));
+
+    const ref = firebase.storage().ref().child(`images/${name}_full.jpg`);
+    return ref.put(blob);
+  };
+
   const selectImage = async () => {
     try {
-      const { cancelled, uri } = await ImagePicker.launchImageLibraryAsync({
+      const { uri, cancelled } = await ImagePicker.launchImageLibraryAsync({
         mediaTypes: ImagePicker.MediaTypeOptions.Images,
         quality: 0.5,
+        allowsEditing: true,
+        aspect: [4, 3],
       });
+
       if (!cancelled) {
-        onChangeImage(uri);
+        uploadImageAsync(firebase, uri).then((snapshot) => {
+          snapshot.ref.getDownloadURL().then((url) => {
+            onChangeImage(url);
+          });
+        });
       }
     } catch (error) {
       logger.log('Error reading an image.');

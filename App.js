@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
+
+import { FirebaseProvider, firebaseRef } from './app/services/firebase';
 import { AppLoading } from 'expo';
 import { I18nManager } from 'react-native';
 
@@ -22,8 +24,9 @@ export default function App() {
   const [isReady, setIsReady] = useState(false);
 
   const restoreUser = async () => {
-    const user = await authStorage.getUser();
-    if (user) setUser(user);
+    firebaseRef.auth().onAuthStateChanged((user) => {
+      if (user != null) setUser(user);
+    });
   };
 
   if (!isReady)
@@ -32,11 +35,13 @@ export default function App() {
     );
 
   return (
-    <AuthContext.Provider value={{ user, setUser }}>
-      <OfflineNotice />
-      <NavigationContainer ref={navigationRef} theme={navigationTheme}>
-        {user ? <AppNavigator /> : <AuthNavigator />}
-      </NavigationContainer>
-    </AuthContext.Provider>
+    <FirebaseProvider>
+      <AuthContext.Provider value={{ user, setUser }}>
+        <OfflineNotice />
+        <NavigationContainer ref={navigationRef} theme={navigationTheme}>
+          {user ? <AppNavigator /> : <AuthNavigator />}
+        </NavigationContainer>
+      </AuthContext.Provider>
+    </FirebaseProvider>
   );
 }

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { StyleSheet, FlatList } from 'react-native';
 
 import {
@@ -10,13 +10,16 @@ import {
 } from '../components';
 import colors from '../config/colors';
 import routes from '../navigation/routes';
-import listingsApi from '../api/listings';
-import useApi from '../hooks/useApi';
+import listingsFirebase from '../firebase/listings';
+import useFirestore from '../hooks/useFirestore';
 
 export const ListingsScreen = ({ navigation }) => {
-  const { data: listings, error, loading, request: loadListings } = useApi(
-    listingsApi.getListings
-  );
+  const {
+    data: listings,
+    error,
+    loading,
+    request: loadListings,
+  } = useFirestore(listingsFirebase.getListings);
 
   useEffect(() => {
     const unsubscribe = navigation.addListener('focus', () => {
@@ -25,6 +28,10 @@ export const ListingsScreen = ({ navigation }) => {
 
     return unsubscribe;
   }, [navigation]);
+
+  // useEffect(() => {
+  //   loadListings();
+  // }, []);
 
   return (
     <>
