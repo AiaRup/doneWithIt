@@ -15,6 +15,7 @@ import useLocation from '../hooks/useLocation';
 import useCollection from '../hooks/useCollection';
 import listingsFirebase from '../firebase/listings';
 import { UploadScreen } from './UploadScreen';
+import useAuth from '../auth/useAuth';
 
 const validationSchema = Yup.object().shape({
   title: Yup.string().required().min(1).label('Title'),
@@ -26,6 +27,7 @@ const validationSchema = Yup.object().shape({
 
 export const ListingEditScreen = () => {
   const location = useLocation();
+  const { user } = useAuth();
   const [uploadVisible, setUploadVisible] = useState(false);
   const [progress, setProgress] = useState(0);
 
@@ -40,6 +42,7 @@ export const ListingEditScreen = () => {
     request({
       ...listing,
       location,
+      createdBy: user.uid,
     });
 
     if (error) {

@@ -25,7 +25,6 @@ const menuItems = [
 ];
 export const AccountScreen = ({ navigation }) => {
   const { user, logOut } = useAuth();
-  console.log(user);
 
   return (
     <Screen style={styles.screen}>
