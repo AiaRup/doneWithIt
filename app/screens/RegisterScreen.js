@@ -10,10 +10,6 @@ import {
   ErrorMessage,
   ActivityIndicator,
 } from '../components';
-import userApi from '../api/users';
-import useAuth from '../auth/useAuth';
-import authApi from '../api/auth';
-import useApi from '../hooks/useApi';
 import logger from '../utility/logger';
 import { firebaseAuth } from '../firebase/auth';
 
@@ -36,14 +32,10 @@ const validationSchema = Yup.object().shape({
 });
 
 export const RegisterScreen = () => {
-  const registerApi = useApi(userApi.register);
-  const loginApi = useApi(authApi.login);
-  // const auth = useAuth();
   const [error, setError] = useState();
   const { signUp, logIn } = firebaseAuth();
 
   const handleSubmit = async (userInfo) => {
-    // const result = await registerApi.request(userInfo);
     const result = await signUp(userInfo);
 
     if (!result.ok) {
@@ -52,7 +44,7 @@ export const RegisterScreen = () => {
       return;
     }
 
-    const { data: authToken } = await logIn(userInfo);
+    await logIn(userInfo);
   };
 
   return (
