@@ -4,7 +4,7 @@ import * as firebase from 'firebase';
 import firebaseConfig from '../config/firebase';
 
 const FirebaseContext = createContext({});
-let firbaseRef = {};
+let firebaseRef = {};
 
 const initialState = {
   user: {},
@@ -12,7 +12,7 @@ const initialState = {
 };
 
 if (!firebase.apps.length) {
-  firbaseRef = firebase.initializeApp(firebaseConfig);
+  firebaseRef = firebase.initializeApp(firebaseConfig);
   firebase.auth().onAuthChange(onAuthStateChange);
 }
 
