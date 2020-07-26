@@ -9,8 +9,6 @@ import {
   AppFormField,
   SubmitButton,
 } from '../components';
-// import authApi from '../api/auth';
-// import useAuth from '../auth/useAuth';
 import { firebaseAuth } from '../firebase/auth';
 
 const validationSchema = Yup.object().shape({
