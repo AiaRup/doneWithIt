@@ -13,7 +13,15 @@ import { firebaseAuth } from '../firebase/auth';
 
 const validationSchema = Yup.object().shape({
   email: Yup.string().required().email().label('Email'),
-  password: Yup.string().required().min(4).label('Password'),
+  password: Yup.string()
+    .required()
+    .min(6, 'Password is too short - should be 6 chars minimum.')
+    .max(20, 'Password is too long - should be 20 chars maximum.')
+    .matches(
+      /^(?=.*?[0-9])(?=.*[A-Z]).{6,20}$/,
+      'Password needs to have at least one uppercase letter and one number.'
+    )
+    .label('Password'),
 });
 
 export const LoginScreen = () => {
@@ -21,6 +29,7 @@ export const LoginScreen = () => {
   const { logIn } = firebaseAuth();
 
   const handleSubmit = async ({ email, password }) => {
+    setLoginFailded(false);
     const result = await logIn({ email, password });
     if (!result.ok) return setLoginFailded(result.error);
     setLoginFailded(false);

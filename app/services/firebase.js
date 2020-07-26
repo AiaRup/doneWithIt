@@ -4,17 +4,11 @@ import * as firebase from 'firebase';
 import firebaseConfig from '../config/firebase';
 
 const FirebaseContext = createContext({});
-let firebaseRef = {};
+export let firebaseRef = {};
 
 if (!firebase.apps.length) {
   firebaseRef = firebase.initializeApp(firebaseConfig);
-  // firebase.auth().onAuthChange(onAuthStateChange);
 }
-
-// const onAuthStateChange = (userId) => {
-//   user = userId;
-//   console.log('userId', userId);
-// };
 
 export const FirebaseProvider = ({ children }) => {
   return (

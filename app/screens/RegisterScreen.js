@@ -49,7 +49,7 @@ export const RegisterScreen = () => {
 
   return (
     <>
-      <ActivityIndicator visible={registerApi.loading || loginApi.loading} />
+      <ActivityIndicator visible={false} />
       <Screen style={styles.container}>
         <AppForm
           initialValues={{ name: '', email: '', password: '' }}
