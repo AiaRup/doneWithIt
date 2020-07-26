@@ -5,8 +5,6 @@ const getListings = (firebase) => {
 };
 
 const addListing = (firebase, listing) => {
-  console.log('listing', listing);
-
   let data = {
     ...listing,
     categoryId: listing.category.value,

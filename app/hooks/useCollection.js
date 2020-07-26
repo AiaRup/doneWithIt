@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useFirebaseContext } from '../services/firebase';
+import logger from '../utility/logger';
 
 export default useCollection = (collection) => {
   const [data, setData] = useState();
@@ -18,7 +19,7 @@ export default useCollection = (collection) => {
         setData(response);
       })
       .catch(() => {
-        console.log('error');
+        logger.log('error');
       });
   };
 
