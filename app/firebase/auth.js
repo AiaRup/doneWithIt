@@ -31,7 +31,12 @@ export const firebaseAuth = () => {
       .auth()
       .createUserWithEmailAndPassword(userInfo.email, userInfo.password)
       .then(
-        () => {
+        async () => {
+          const user = firebase.auth().currentUser;
+          await user.updateProfile({
+            displayName: userInfo.name,
+          });
+
           return { error: null, ok: true };
         },
         (error) => {

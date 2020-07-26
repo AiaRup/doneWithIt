@@ -25,6 +25,7 @@ const menuItems = [
 ];
 export const AccountScreen = ({ navigation }) => {
   const { user, logOut } = useAuth();
+  console.log(user);
 
   return (
     <Screen style={styles.screen}>
@@ -32,8 +33,8 @@ export const AccountScreen = ({ navigation }) => {
         <ListItem
           title={user.name}
           subTitle={user.email}
-          image={user.image}
-          avatar={user.name}
+          image={user.providerData[0].photoURL}
+          avatar={user.providerData[0].displayName}
         />
       </View>
       <View style={styles.container}>
