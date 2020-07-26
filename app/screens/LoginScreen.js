@@ -9,8 +9,9 @@ import {
   AppFormField,
   SubmitButton,
 } from '../components';
-import authApi from '../api/auth';
-import useAuth from '../auth/useAuth';
+// import authApi from '../api/auth';
+// import useAuth from '../auth/useAuth';
+import useAuth from '../firebase/auth/useAuth';
 
 const validationSchema = Yup.object().shape({
   email: Yup.string().required().email().label('Email'),
@@ -22,10 +23,11 @@ export const LoginScreen = () => {
   const [loginFailed, setLoginFailded] = useState(false);
 
   const handleSubmit = async ({ email, password }) => {
-    const result = await authApi.login(email, password);
-    if (!result.ok) return setLoginFailded(true);
-    setLoginFailded(false);
-    auth.logIn(result.data);
+    // const result = await authApi.login(email, password);
+    // const result = await authApi.login(email, password);
+    // if (!result.ok) return setLoginFailded(true);
+    // setLoginFailded(false);
+    auth.logIn({ email, password });
   };
 
   return (

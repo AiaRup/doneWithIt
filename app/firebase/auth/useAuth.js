@@ -13,10 +13,10 @@ export default useAuth = () => {
   const logIn = (userInfo) => {
     firebase
       .auth()
-      .signInWithEmailAndPassword(userInfo)
+      .signInWithEmailAndPassword(...userInfo)
       .then(
         () => {},
-        (error) => console.log('Error on login')
+        (error) => console.log('Error on login', error.message)
       );
     // const user = jwtDecode(authToken);
     // setUser(user);
@@ -31,12 +31,12 @@ export default useAuth = () => {
   const signUp = (userInfo) => {
     firebase
       .auth()
-      .createUserWithEmailAndPassword(userInfo)
+      .createUserWithEmailAndPassword(...userInfo)
       .then(
         () => {},
-        (error) => console.log('Error on sign up')
+        (error) => console.log('Error on sign up', error.message)
       );
   };
 
-  return { user, logOut, logIn };
+  return { user, logOut, logIn, signUp };
 };
