@@ -8,17 +8,17 @@ let firebaseRef = {};
 
 if (!firebase.apps.length) {
   firebaseRef = firebase.initializeApp(firebaseConfig);
-  firebase.auth().onAuthChange(onAuthStateChange);
+  // firebase.auth().onAuthChange(onAuthStateChange);
 }
 
-const onAuthStateChange = (userId) => {
-  user = userId;
-  console.log('userId', userId);
-};
+// const onAuthStateChange = (userId) => {
+//   user = userId;
+//   console.log('userId', userId);
+// };
 
 export const FirebaseProvider = ({ children }) => {
   return (
-    <FirebaseContext.Provider value={{ firebase: firbaseRef }}>
+    <FirebaseContext.Provider value={{ firebase: firebaseRef }}>
       {children}
     </FirebaseContext.Provider>
   );

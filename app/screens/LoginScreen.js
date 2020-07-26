@@ -11,7 +11,7 @@ import {
 } from '../components';
 // import authApi from '../api/auth';
 // import useAuth from '../auth/useAuth';
-import useAuth from '../firebase/auth/useAuth';
+import { firebaseAuth } from '../firebase/auth';
 
 const validationSchema = Yup.object().shape({
   email: Yup.string().required().email().label('Email'),
@@ -19,15 +19,18 @@ const validationSchema = Yup.object().shape({
 });
 
 export const LoginScreen = () => {
-  const auth = useAuth();
   const [loginFailed, setLoginFailded] = useState(false);
+  const { logIn } = firebaseAuth();
+
+  console.log('logIn', logIn);
 
   const handleSubmit = async ({ email, password }) => {
     // const result = await authApi.login(email, password);
     // const result = await authApi.login(email, password);
-    // if (!result.ok) return setLoginFailded(true);
-    // setLoginFailded(false);
-    auth.logIn({ email, password });
+    const result = await logIn({ email, password });
+    console.log('result', result);
+    if (!result.ok) return setLoginFailded(result.error);
+    setLoginFailded(false);
   };
 
   return (
@@ -39,7 +42,7 @@ export const LoginScreen = () => {
         validationSchema={validationSchema}
       >
         <ErrorMessage
-          error="Invalid email and/or password"
+          error={loginFailed || 'Invalid email and/or password'}
           visible={loginFailed}
         />
         <AppFormField

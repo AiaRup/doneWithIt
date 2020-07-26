@@ -1,17 +1,19 @@
 import { useContext, useState } from 'react';
 // import jwtDecode from 'jwt-decode';
 
-import AuthContext from '../../auth/context';
-import authStorage from '../../auth/storage';
+import AuthContext from '../auth/context';
+import authStorage from '../auth/storage';
 
-import { useFirebaseContext } from '../../services/firebase';
+import { useFirebaseContext } from '../services/firebase';
 
-export default useAuth = () => {
+export const firebaseAuth = () => {
   const { user, setUser } = useContext(AuthContext);
   const { firebase } = useFirebaseContext();
 
   const logIn = (userInfo) => {
-    firebase
+    console.log('firebase', firebase);
+
+    return firebase
       .auth()
       .signInWithEmailAndPassword(userInfo.email, userInfo.password)
       .then(
