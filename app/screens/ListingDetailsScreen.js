@@ -1,12 +1,31 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, View, KeyboardAvoidingView, Platform } from 'react-native';
 import { Image } from 'react-native-expo-image-cache';
 
 import { ListItem, AppText, ContactSellerForm } from '../components';
 import colors from '../config/colors';
+import listingsApi from '../firebase/listings';
 
 export const ListingDetailsScreen = ({ route }) => {
+  const [user, setUser] = useState({});
+  const { data: listingsOfCurrenUser, request: loadListings } = useFirestore(
+    listingsApi.getListings
+  );
+
   const listing = route.params;
+
+  useEffect(() => {
+    const getUserInfo = async () => {
+      await loadListings();
+      const listingsOfUser = listingsOfCurrenUser.filter(
+        (lis) => lis.createdBy === listing.createdBy
+      );
+
+      setUser(createdBy);
+    };
+
+    getUserInfo();
+  }, [listingsOfCurrenUser]);
 
   return (
     <KeyboardAvoidingView

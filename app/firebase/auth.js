@@ -8,7 +8,7 @@ import { useFirebaseContext } from '../services/firebase';
 export const firebaseAuth = () => {
   const { user } = useContext(AuthContext);
   const { firebase } = useFirebaseContext();
-  const { error, request } = useFirestore(users.addUser);
+  const { request } = useFirestore(users.addUser);
 
   const logIn = (userInfo) => {
     return firebase
