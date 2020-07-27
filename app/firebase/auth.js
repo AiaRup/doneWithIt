@@ -1,12 +1,14 @@
 import { useContext } from 'react';
 
 import AuthContext from '../auth/context';
+import users from './users';
 
 import { useFirebaseContext } from '../services/firebase';
 
 export const firebaseAuth = () => {
   const { user } = useContext(AuthContext);
   const { firebase } = useFirebaseContext();
+  const { error, request } = useFirestore(users.addUser);
 
   const logIn = (userInfo) => {
     return firebase
@@ -37,6 +39,13 @@ export const firebaseAuth = () => {
             displayName: userInfo.name,
           });
 
+          const newUser = {
+            email: userInfo.email,
+            name: userInfo.name,
+            uid: user.uid,
+          };
+
+          await request(newUser);
           return { error: null, ok: true };
         },
         (error) => {
