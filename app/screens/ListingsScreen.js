@@ -29,10 +29,6 @@ export const ListingsScreen = ({ navigation }) => {
     return unsubscribe;
   }, [navigation]);
 
-  // useEffect(() => {
-  //   loadListings();
-  // }, []);
-
   return (
     <>
       <ActivityIndicator visible={loading} />

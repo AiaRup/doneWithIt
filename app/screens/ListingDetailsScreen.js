@@ -1,60 +1,94 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, View, KeyboardAvoidingView, Platform } from 'react-native';
+import {
+  StyleSheet,
+  View,
+  KeyboardAvoidingView,
+  Platform,
+  ScrollView,
+} from 'react-native';
 import { Image } from 'react-native-expo-image-cache';
 
 import { ListItem, AppText, ContactSellerForm } from '../components';
 import colors from '../config/colors';
 import listingsApi from '../firebase/listings';
+import usersApi from '../firebase/users';
 
-export const ListingDetailsScreen = ({ route }) => {
-  const [user, setUser] = useState({});
+export const ListingDetailsScreen = ({ route, navigation }) => {
+  const [userListings, setUserListings] = useState(0);
   const { data: listingsOfCurrenUser, request: loadListings } = useFirestore(
     listingsApi.getListings
   );
+  const { data: currentUser, request: getUser } = useFirestore(
+    usersApi.getUserById
+  );
+
+  useEffect(() => {
+    const unsubscribe = navigation.addListener('focus', () => {
+      loadListings();
+      getUser(listing.createdBy);
+      // const { data: currentUser } = useFirestore(usersApi.getUserById);
+      // const { data: listingsOfCurrenUser } = useFirestore(
+      //   listingsApi.getListings
+      // );
+
+      // console.log({ listingsOfCurrenUser, currentUser });
+    });
+
+    return unsubscribe;
+  }, [navigation]);
 
   const listing = route.params;
 
-  useEffect(() => {
-    const getUserInfo = async () => {
-      await loadListings();
-      const listingsOfUser = listingsOfCurrenUser.filter(
-        (lis) => lis.createdBy === listing.createdBy
-      );
+  // useEffect(() => {
+  //   const getUserInfo = async () => {
+  //     await loadListings();
+  //     await getUser(listing.createdBy);
 
-      setUser(createdBy);
-    };
+  //     const listingsOfUser = listingsOfCurrenUser.filter(
+  //       (lis) => lis.createdBy === listing.createdBy
+  //     );
 
-    getUserInfo();
-  }, [listingsOfCurrenUser]);
+  //     setUser({ ...currentUser });
+  //   };
+
+  //   getUserInfo();
+  // }, [listing]);
 
   return (
-    <KeyboardAvoidingView
-      behavior="position"
-      keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : 100}
-    >
-      <Image
-        style={styles.image}
-        preview={{ uri: listing.images[0].thumbnailUrl }}
-        tint="light"
-        uri={listing.images[0].url}
-      />
-      <View style={styles.detailsContainer}>
-        <AppText style={styles.title}>{listing.title}</AppText>
-        <AppText style={styles.price}>${listing.price}</AppText>
-        <View style={styles.userContainer}>
-          <ListItem
-            image={require('../assets/mosh.jpg')}
-            title="Mosh Hamedani"
-            subTitle="5 Listings"
-          />
+    <ScrollView style={styles.container}>
+      <KeyboardAvoidingView
+        behavior="position"
+        keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : 100}
+        style={{ flex: 1 }}
+      >
+        <Image
+          style={styles.image}
+          preview={{ uri: listing.images[0].thumbnailUrl }}
+          tint="light"
+          uri={listing.images[0].url}
+        />
+        <View style={styles.detailsContainer}>
+          <AppText style={styles.title}>{listing.title}</AppText>
+          <AppText style={styles.price}>${listing.price}</AppText>
+          <View style={styles.userContainer}>
+            <ListItem
+              image={currentUser.photo}
+              avatar={currentUser.name}
+              title={currentUser.name}
+              subTitle="5 Listings"
+            />
+          </View>
+          <ContactSellerForm listing={listing} />
         </View>
-        <ContactSellerForm listing={listing} />
-      </View>
-    </KeyboardAvoidingView>
+      </KeyboardAvoidingView>
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
   detailsContainer: {
     padding: 20,
   },
