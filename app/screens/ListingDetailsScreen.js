@@ -22,18 +22,6 @@ export const ListingDetailsScreen = ({ route, navigation }) => {
     usersApi.getUserById
   );
 
-  useEffect(() => {
-    const unsubscribe = navigation.addListener('focus', () => {
-      loadListings();
-      getUser(listing.createdBy);
-      // const { data: currentUser } = useFirestore(usersApi.getUserById);
-      // const { data: listingsOfCurrenUser } = useFirestore(
-      //   listingsApi.getListings
-      // );
-
-      // console.log({ listingsOfCurrenUser, currentUser });
-    });
-
     return unsubscribe;
   }, [navigation]);
 
