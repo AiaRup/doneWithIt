@@ -13,7 +13,7 @@ import colors from '../config/colors'
 import listingsApi from '../firebase/listings'
 import usersApi from '../firebase/users'
 
-export const ListingDetailsScreen = ({ route, navigation }) => {
+export const ListingDetailsScreen = ({ route }) => {
   const listing = route.params
 
   return (
