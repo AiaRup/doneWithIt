@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 
 import { FirebaseProvider, firebaseRef } from './app/services/firebase';
-import { AppLoading } from 'expo';
+import AppLoading from 'expo-app-loading';
 import { I18nManager } from 'react-native';
 
 import navigationTheme from './app/navigation/navigationTheme';
@@ -10,7 +10,6 @@ import AppNavigator from './app/navigation/AppNavigator';
 import { OfflineNotice } from './app/components';
 import AuthNavigator from './app/navigation/AuthNavigator';
 import AuthContext from './app/auth/context';
-import authStorage from './app/auth/storage';
 import { navigationRef } from './app/navigation/RootNavigation';
 import logger from './app/utility/logger';
 
@@ -31,7 +30,11 @@ export default function App() {
 
   if (!isReady)
     return (
-      <AppLoading startAsync={restoreUser} onFinish={() => setIsReady(true)} />
+      <AppLoading
+        startAsync={restoreUser}
+        onFinish={() => setIsReady(true)}
+        onError={(e) => logger.log('Error app loading', e)}
+      />
     );
 
   return (

@@ -13,6 +13,7 @@ const menuItems = [
       name: 'format-list-bulleted',
       backgroundColor: colors.primary,
     },
+    targetScreen: routes.LISTING,
   },
   {
     title: 'My Messages',
@@ -56,8 +57,8 @@ export const AccountScreen = ({ navigation }) => {
         ></FlatList>
       </View>
       <ListItem
-        title="Log Out"
-        IconComponent={<Icon name="logout" backgroundColor="#ffe66d" />}
+        title='Log Out'
+        IconComponent={<Icon name='logout' backgroundColor='#ffe66d' />}
         onPress={() => logOut()}
       />
     </Screen>
