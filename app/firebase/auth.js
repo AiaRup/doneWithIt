@@ -2,7 +2,7 @@ import { useContext } from 'react';
 
 import AuthContext from '../auth/context';
 import users from './users';
-
+import useFirestore from '../hooks/useFirestore';
 import { useFirebaseContext } from '../services/firebase';
 
 export const firebaseAuth = () => {
