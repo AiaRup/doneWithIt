@@ -1,20 +1,35 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import {
   StyleSheet,
   View,
   KeyboardAvoidingView,
   Platform,
   ScrollView,
-} from 'react-native'
-import { Image } from 'react-native-expo-image-cache'
+} from 'react-native';
+import { Image } from 'react-native-expo-image-cache';
 
-import { ListItem, AppText, ContactSellerForm } from '../components'
-import colors from '../config/colors'
-import listingsApi from '../firebase/listings'
-import usersApi from '../firebase/users'
+import { ListItem, AppText, ContactSellerForm } from '../components';
+import colors from '../config/colors';
+import usersApi from '../firebase/users';
+import useFirestore from '../hooks/useFirestore';
 
 export const ListingDetailsScreen = ({ route }) => {
-  const listing = route.params
+  const listing = route.params;
+  const { request, data } = useFirestore(usersApi.getUserById);
+  const [createdBy, setCreatedBy] = useState(null);
+
+  const updateListingOwner = async (id) => {
+    await request(id);
+    if (data) {
+      setCreatedBy(data);
+    }
+  };
+
+  useEffect(() => {
+    if (listing.createdBy) {
+      updateListingOwner(listing.createdBy);
+    }
+  }, [listing?.createdBy]);
 
   return (
     <ScrollView style={styles.container}>
@@ -29,23 +44,25 @@ export const ListingDetailsScreen = ({ route }) => {
           tint='light'
           uri={listing.images[0].url}
         />
-        <View style={styles.detailsContainer}>
-          <AppText style={styles.title}>{listing.title}</AppText>
-          <AppText style={styles.price}>${listing.price}</AppText>
-          <View style={styles.userContainer}>
-            <ListItem
-              image={currentUser.photo}
-              avatar={currentUser.name}
-              title={currentUser.name}
-              subTitle='5 Listings'
-            />
+        {createdBy && (
+          <View style={styles.detailsContainer}>
+            <AppText style={styles.title}>{listing.title}</AppText>
+            <AppText style={styles.price}>${listing.price}</AppText>
+            <View style={styles.userContainer}>
+              <ListItem
+                image={createdBy.photo}
+                avatar={createdBy.name}
+                title={createdBy.name}
+                subTitle='5 Listings'
+              />
+            </View>
+            <ContactSellerForm listing={listing} />
           </View>
-          <ContactSellerForm listing={listing} />
-        </View>
+        )}
       </KeyboardAvoidingView>
     </ScrollView>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -71,4 +88,4 @@ const styles = StyleSheet.create({
   userContainer: {
     marginVertical: 40,
   },
-})
+});
