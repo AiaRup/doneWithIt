@@ -173,3 +173,5 @@ I started the project as part of the [ultimate react native course](https://code
 [issues-url]: https://github.com/AiaRup/doneWithIt/issues
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://www.linkedin.com/in/aia-rupsom/
+
+[![Open in Visual Studio Code](https://open.vscode.dev/badges/open-in-vscode.svg)](https://open.vscode.dev/AiaRup/doneWithIt)
